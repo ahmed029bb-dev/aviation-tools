@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyTutor — PPL Study Buddy</title>
+
+  <!-- Our stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- ===== HEADER (with drifting clouds + floating plane) ===== -->
+  <header class="app-header">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="white">
+        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+      </svg>
+    </span>
+    <div class="head-text">
+      <h1>SkyTutor</h1>
+      <div class="subtitle">Your Private Pilot License study buddy</div>
+    </div>
+  </header>
+
+  <!-- ===== NAVIGATION TABS ===== -->
+  <nav class="nav">
+    <button class="tab active" id="tab-learn"    onclick="showScreen('learn')">📚 Learn</button>
+    <button class="tab"        id="tab-quiz"     onclick="showScreen('quiz')">✅ Quiz</button>
+    <button class="tab"        id="tab-progress" onclick="showScreen('progress')">📈 Progress</button>
+    <button class="tab"        id="tab-tutor"    onclick="showScreen('tutor')">🧑‍✈️ Ask the Tutor</button>
+  </nav>
+
+  <!-- ===== LEARN SCREEN ===== -->
+  <section class="screen active container" id="screen-learn">
+    <div id="topics-view">
+      <div class="hero">
+        <h2>Choose a topic 📚</h2>
+        <p>Bite-sized lessons in plain English. Tap one to start.</p>
+      </div>
+      <div class="topic-list" id="topic-list"></div>
+    </div>
+    <article class="lesson" id="lesson-view" style="display:none;">
+      <div id="lesson-content"></div>
+    </article>
+  </section>
+
+  <!-- ===== QUIZ SCREEN ===== -->
+  <section class="screen container" id="screen-quiz">
+    <div id="quiz-area">
+      <div class="hero">
+        <h2>Test yourself ✅</h2>
+        <p>Five questions per round. The quiz learns what you miss — and asks you more of it.</p>
+      </div>
+      <button class="primary-btn" onclick="startQuiz()">Start a round 🛫</button>
+    </div>
+  </section>
+
+  <!-- ===== PROGRESS SCREEN ===== -->
+  <section class="screen container" id="screen-progress">
+    <div id="progress-area"></div>
+  </section>
+
+  <!-- ===== ASK THE TUTOR SCREEN ===== -->
+  <section class="screen container" id="screen-tutor">
+    <div class="hero">
+      <h2>Ask the Tutor 🧑‍✈️</h2>
+      <p>Type an aviation question in plain English. Works fully offline.</p>
+    </div>
+
+    <div class="chat-box">
+      <div class="chat-log" id="chat-log">
+        <div class="bubble tutor">Hey, future pilot! Ask me things like
+          <em>"what is a stall?"</em> or <em>"who has right of way?"</em></div>
+      </div>
+
+      <div class="chat-chips">
+        <button class="chip" onclick="askSuggested('What is a stall?')">What is a stall?</button>
+        <button class="chip" onclick="askSuggested('Who has right of way?')">Who has right of way?</button>
+        <button class="chip" onclick="askSuggested('What is a cold front?')">What is a cold front?</button>
+        <button class="chip" onclick="askSuggested('What is the 1 in 60 rule?')">The 1 in 60 rule?</button>
+      </div>
+
+      <div class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Ask me anything about flying…"
+               onkeydown="if (event.key === 'Enter') sendChat()" />
+        <button class="primary-btn send-btn" onclick="sendChat()">Send ✈</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Load the DATA first, then the LOGIC that uses it. Order matters! -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
